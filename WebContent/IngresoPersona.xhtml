@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"     
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+       
+
+<h:head>    	
+    </h:head>
+<p:tabMenu activeIndex="#{param.i}">
+<p:menuitem value="Inicio" outcome="NewFile.xhtml" icon="ui-icon-star">
+        <f:param name="i" value="0" />
+    </p:menuitem>
+    <p:menuitem value="IngresarPersonas" outcome="IngresoPersona.xhtml" icon="ui-icon-star">
+        <f:param name="i" value="1" />
+    </p:menuitem>
+    
+</p:tabMenu>
+
+<h:body>
+<br></br>
+<h:form>
+    		<p:dataTable id="d" var="p" value="#{personas.persona}">
+    
+ 
+    <p:column headerText="Nombre">
+        <h:outputText value="#{p.nombre}" />
+    </p:column>
+ 
+    <p:column headerText="Tipo">
+        <h:outputText value="#{p.tipoPersona.tipo}" />
+    </p:column>
+ 
+   
+</p:dataTable>
+
+    <h:panelGrid columns="8" cellpadding="15">        
+    <p:outputLabel>Nombre:</p:outputLabel>
+       	<p:inputText size="24" value="#{personas.nombre}" />
+       
+         </h:panelGrid>
+          <p:outputLabel value="Tipo Persona: " />
+        <h:selectOneMenu value="#{personas.id}">            
+        <f:selectItem itemLabel="Seleccione" itemValue="0" />        
+        <f:selectItems value="#{tipos.ti}" var="t" itemLabel="#{t.tipo}" itemValue="#{t.id}" />
+        </h:selectOneMenu>
+        <h:panelGrid>
+        <p:outputLabel value="#{t.id}"   />
+        <br></br>    
+         <p:commandButton value="Agregar" update="d" actionListener="#{personas.insertar}" />
+        </h:panelGrid>
+        
+    
+    
+</h:form>
+</h:body>
+</html>
